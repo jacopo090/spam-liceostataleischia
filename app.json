@@ -12,7 +12,7 @@
   "env": {
     "THREADS": {
       "description": "Number of threads to run in concurrent",
-      "generator": "50"
+      "value": "50"
     },
     "TIMEOUT": {
       "description": "Timeout of each request",
