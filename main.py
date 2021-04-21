@@ -1,8 +1,8 @@
 import requests, threading, time, os
 
 I=0
-nThreads = os.environ.get("THREADS", 50)
-TIMEOUT = os.environ.get("TIMEOUT", 20)
+nThreads = int(os.environ.get("THREADS", "50"))
+TIMEOUT = int(os.environ.get("TIMEOUT", "20"))
 hv = os.environ.get("HEAVYPRINT", "false")
 
 threads = []
