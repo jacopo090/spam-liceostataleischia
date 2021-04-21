@@ -8,5 +8,19 @@
     {
       "url": "heroku/python"
     }
-  ]
+  ],
+  "env": {
+    "THREADS": {
+      "description": "Number of threads to run in concurrent",
+      "generator": "50"
+    },
+    "TIMEOUT": {
+      "description": "Timeout of each request",
+      "value": "10"
+    },
+    "HEAVYPRINT": {
+      "description": "Heavyprint on heroku console each request",
+      "value": "false"
+    }
+  }
 }
