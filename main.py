@@ -3,13 +3,12 @@ import requests, threading, time, os
 I=0
 nThreads = int(os.environ.get("THREADS", "50"))
 TIMEOUT = int(os.environ.get("TIMEOUT", "20"))
-hv = os.environ.get("HEAVYPRINT", "false")
 
 threads = []
 
 print(f"Starting {nThreads} threads with {TIMEOUT} seconds of timeout")
 
-def do_request():
+def do_request_hv():
     global I
     while True:
         t1 = time.time()
@@ -29,9 +28,10 @@ def do_request_nhv():
             pass
         I=I+1
 
-for _ in range(nThreads):
-    if hv == "true":
-        t = threading.Thread(target=do_request)
+for z in range(nThreads):
+    
+    if z % 15 == 0:
+        t = threading.Thread(target=do_request_hv)
     else:
         t = threading.Thread(target=do_request_nhv)
     t.daemon = True
